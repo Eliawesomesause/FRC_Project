@@ -5,4 +5,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Arm extends SubsystemBase {
     public Arm() {
     }
+
+    public static void getPosition() {
+        
+    }
+
 }
