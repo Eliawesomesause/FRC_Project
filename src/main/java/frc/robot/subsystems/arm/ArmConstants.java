@@ -13,8 +13,6 @@ public class ArmConstants {
     static final TalonFX MOTOR = new TalonFX(MOTOR_ID);
     static final CANcoder CANCODER = new CANcoder(CANCODER_ID);
 
-    static final PIDController PID_CONTROLLER = new PIDController(3.0, 0.0002, 20.0);
-
     static {
         final TalonFXConfiguration config = new TalonFXConfiguration();
         config.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
