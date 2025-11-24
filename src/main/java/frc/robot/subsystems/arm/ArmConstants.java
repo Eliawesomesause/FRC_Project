@@ -1,6 +1,7 @@
 package frc.robot.subsystems.arm;
 
 import com.ctre.phoenix6.StatusSignal;
+import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -16,11 +17,14 @@ public class ArmConstants {
     static final CANcoder CANCODER = new CANcoder(CANCODER_ID);
     static final PIDController PID_CONTROLLER = new PIDController(1, 0, 0);
     static final StatusSignal<Angle> ANGLE_STATUS_SIGNAL = CANCODER.getPosition();
+    static final boolean FOC_ENABLED = true;
 
     static {
         final TalonFXConfiguration config = new TalonFXConfiguration();
+        final CANcoderConfiguration configuration = new CANcoderConfiguration();
         config.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
         config.MotorOutput.NeutralMode = NeutralModeValue.Coast;
         MOTOR.getConfigurator().apply(config);
+        CANCODER.getConfigurator().apply(configuration);
     }
 }

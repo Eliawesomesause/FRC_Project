@@ -6,12 +6,12 @@ import edu.wpi.first.wpilibj2.command.FunctionalCommand;
 import frc.robot.RobotContainer;
 
 public class ArmCommands {
-    public static Command getSetTargetAngleCommand() {
+    public static Command getSetTargetAngleCommand(double setPoint) {
         return new FunctionalCommand(
-                () -> Arm.getPosition(),
-                ()-> ArmConstants.MOTOR.set(Arm.pidController().calculate(ArmConstants.CANCODER.getPosition(), 67)),
-                () ->,
-                () ->,
+                () -> RobotContainer.ARM.setTargetAngle(setPoint),
+                () -> RobotContainer.ARM.setTargetAngle(setPoint) ,
+                (Interrupted) -> RobotContainer.ARM.stopMotor() ,
+                () -> false,
                 RobotContainer.ARM
         );
     }
