@@ -9,8 +9,8 @@ public class ArmCommands {
     public static Command getSetTargetAngleCommand(double setPoint) {
         return new FunctionalCommand(
                 () -> RobotContainer.ARM.setTargetAngle(setPoint),
-                () -> RobotContainer.ARM.setTargetAngle(setPoint) ,
-                (Interrupted) -> RobotContainer.ARM.stopMotor() ,
+                () -> RobotContainer.ARM.setTargetAngle(setPoint),
+                (Interrupted) -> RobotContainer.ARM.stopMotor(),
                 () -> false,
                 RobotContainer.ARM
         );
