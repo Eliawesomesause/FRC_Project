@@ -2,11 +2,13 @@ package frc.robot.subsystems.arm;
 
 import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
+import com.ctre.phoenix6.configs.MagnetSensorConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import com.ctre.phoenix6.signals.SensorDirectionValue;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.units.measure.Angle;
 
@@ -25,6 +27,9 @@ public class ArmConstants {
         final CANcoderConfiguration configureEncoder = new CANcoderConfiguration();
         configureMotor.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
         configureMotor.MotorOutput.NeutralMode = NeutralModeValue.Coast;
+        configureEncoder.MagnetSensor.SensorDirection  = SensorDirectionValue.CounterClockwise_Positive;
+        configureEncoder.MagnetSensor.AbsoluteSensorDiscontinuityPoint = 0.5;
+        configureEncoder.MagnetSensor.MagnetOffset = 0;
         ANGLE_STATUS_SIGNAL.setUpdateFrequency(100);
         ENCODER.optimizeBusUtilization();
         MOTOR.getConfigurator().apply(configureMotor);
