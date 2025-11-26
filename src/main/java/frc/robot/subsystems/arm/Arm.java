@@ -16,12 +16,12 @@ public class Arm extends SubsystemBase {
         setTargetVoltage(calculatePIDOutput(targetAngle));
     }
 
-    public double getAngleAsDouble() {
-        return ArmConstants.ANGLE_STATUS_SIGNAL.refresh().getValueAsDouble();
+    public double calculatePIDOutput(double targetAngle) {
+        return ArmConstants.PID_CONTROLLER.calculate(getAngleDegrees(), targetAngle);
     }
 
-    public double calculatePIDOutput(double targetAngle) {
-        return ArmConstants.PID_CONTROLLER.calculate(getAngleAsDouble(), targetAngle);
+    public double getAngleDegrees() {
+        return ArmConstants.ANGLE_STATUS_SIGNAL.refresh().getValueAsDouble();
     }
 
     void setTargetVoltage(double voltage) {
