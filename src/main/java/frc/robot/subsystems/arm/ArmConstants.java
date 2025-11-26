@@ -2,7 +2,6 @@ package frc.robot.subsystems.arm;
 
 import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
-import com.ctre.phoenix6.configs.MagnetSensorConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -13,8 +12,9 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.units.measure.Angle;
 
 public class ArmConstants {
-    private static final int MOTOR_ID = 1;
-    private static final int ENCODER_ID = 1;
+    private static final int
+                    MOTOR_ID =1,
+                    ENCODER_ID = 1;
     static final TalonFX MOTOR = new TalonFX(MOTOR_ID);
     static final CANcoder ENCODER = new CANcoder(ENCODER_ID);
 
@@ -23,16 +23,24 @@ public class ArmConstants {
     static final boolean FOC_ENABLED = true;
 
     static {
+        configureMotor();
+        configureEncoder();
+    }
+
+    private static void configureMotor() {
         final TalonFXConfiguration configureMotor = new TalonFXConfiguration();
-        final CANcoderConfiguration configureEncoder = new CANcoderConfiguration();
         configureMotor.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
         configureMotor.MotorOutput.NeutralMode = NeutralModeValue.Coast;
-        configureEncoder.MagnetSensor.SensorDirection  = SensorDirectionValue.CounterClockwise_Positive;
+        MOTOR.getConfigurator().apply(configureMotor);
+    }
+
+    private static void configureEncoder() {
+        final CANcoderConfiguration configureEncoder = new CANcoderConfiguration();
+        configureEncoder.MagnetSensor.SensorDirection = SensorDirectionValue.CounterClockwise_Positive;
         configureEncoder.MagnetSensor.AbsoluteSensorDiscontinuityPoint = 0.5;
         configureEncoder.MagnetSensor.MagnetOffset = 0;
         ANGLE_STATUS_SIGNAL.setUpdateFrequency(100);
         ENCODER.optimizeBusUtilization();
-        MOTOR.getConfigurator().apply(configureMotor);
         ENCODER.getConfigurator().apply(configureEncoder);
     }
 }
