@@ -27,7 +27,7 @@ public class Arm extends SubsystemBase {
     void setTargetVoltage(double voltage) {
         motor.setControl(voltageRequest.withOutput(voltage));
     }
-    
+
     void stopMotor() {
         motor.stopMotor();
     }

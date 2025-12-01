@@ -31,6 +31,7 @@ public class ArmConstants {
         final TalonFXConfiguration configureMotor = new TalonFXConfiguration();
         configureMotor.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
         configureMotor.MotorOutput.NeutralMode = NeutralModeValue.Coast;
+        MOTOR.optimizeBusUtilization();
         MOTOR.getConfigurator().apply(configureMotor);
     }
 
@@ -39,8 +40,8 @@ public class ArmConstants {
         configureEncoder.MagnetSensor.SensorDirection = SensorDirectionValue.CounterClockwise_Positive;
         configureEncoder.MagnetSensor.AbsoluteSensorDiscontinuityPoint = 0.5;
         configureEncoder.MagnetSensor.MagnetOffset = 0;
-        ANGLE_STATUS_SIGNAL.setUpdateFrequency(100);
         ENCODER.optimizeBusUtilization();
         ENCODER.getConfigurator().apply(configureEncoder);
+        ANGLE_STATUS_SIGNAL.setUpdateFrequency(100);
     }
 }
