@@ -8,8 +8,8 @@ import frc.robot.RobotContainer;
 public class ArmCommands {
     public static Command getSetTargetAngleCommand(double targetAngle) {
         return new FunctionalCommand(
-                () -> RobotContainer.ARM.setTargetAngleDegrees(targetAngle),
-                () -> RobotContainer.ARM.setTargetAngleDegrees(targetAngle),
+                () -> RobotContainer.ARM.setTargetAngle(targetAngle),
+                () -> RobotContainer.ARM.setTargetAngle(targetAngle),
                 (interrupted) -> RobotContainer.ARM.stopMotor(),
                 () -> false,
                 RobotContainer.ARM

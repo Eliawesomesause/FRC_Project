@@ -12,23 +12,28 @@ public class Arm extends SubsystemBase {
     public Arm() {
     }
 
-    void setTargetAngleDegrees(double targetAngle) {
+    void setTargetAngle(double targetAngle) {
         setTargetVoltage(calculatePIDOutput(targetAngle));
     }
 
-    double calculatePIDOutput(double targetAngle) {
-        return ArmConstants.PID_CONTROLLER.calculate(getCurrentAngleDegrees(), targetAngle);
+    void setTargetState(ArmConstants.ArmState state) {
+        setTargetAngle(state.targetAngle);
     }
 
-    double getCurrentAngleDegrees() {
-        return ArmConstants.ANGLE_STATUS_SIGNAL.refresh().getValueAsDouble();
-    }
-
-    void setTargetVoltage(double voltage) {
-        motor.setControl(voltageRequest.withOutput(voltage));
-    }
 
     void stopMotor() {
         motor.stopMotor();
+    }
+
+    private double calculatePIDOutput(double targetAngle) {
+        return ArmConstants.PID_CONTROLLER.calculate(getCurrentAngle(), targetAngle);
+    }
+
+    private double getCurrentAngle() {
+        return ArmConstants.ANGLE_STATUS_SIGNAL.refresh().getValueAsDouble();
+    }
+
+    private void setTargetVoltage(double voltage) {
+        motor.setControl(voltageRequest.withOutput(voltage));
     }
 }
