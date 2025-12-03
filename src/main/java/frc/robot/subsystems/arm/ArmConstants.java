@@ -44,4 +44,16 @@ public class ArmConstants {
         ENCODER.getConfigurator().apply(configureEncoder);
         ANGLE_STATUS_SIGNAL.setUpdateFrequency(100);
     }
+
+    enum ArmState{
+        LOW (21),
+        MEDIUM (41),
+        HIGH (67);
+
+        public final double targetAngle;
+
+        private ArmState(double targetAngle) {
+            this.targetAngle = targetAngle;
+        }
+    }
 }
